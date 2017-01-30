@@ -73,6 +73,7 @@
 #define ARDOUBLE_IS_FLOAT
 #include <AR/ar.h>
 #include <ARController.h>
+#include <Mfidl.h>
 #define EXPORT_API __declspec(dllexport)
 
 
@@ -98,6 +99,8 @@ extern "C" {
 	* @return			true if successful, false if an error occurred
 	*/
 	EXPORT_API bool aruwpUpdate(ARUint8* frame);
+
+	EXPORT_API bool aruwpUpdateIMFMediaBuffer(ARUint8* frame);
 
 	// setter and getter
 	EXPORT_API void aruwpSetVideoThreshold(int threshold);

@@ -156,6 +156,37 @@ EXPORT_API bool aruwpUpdate(ARUint8* frame)
 	return gARTK->update(frame);
 }
 
+EXPORT_API bool aruwpUpdateIMFMediaBuffer(ARUint8* frame)
+{
+	if (!gARTK)
+	{
+		return false;
+	}
+
+	IMFMediaBuffer* mediaBuffer = (IMFMediaBuffer*)frame;
+
+	BYTE* buffer;
+	DWORD maxLength;
+	DWORD currentLength;
+
+	HRESULT result = mediaBuffer->Lock(&buffer, &maxLength, &currentLength);
+
+	if (result != S_OK)
+	{
+		return false;
+	}
+
+	ARUint8* startOfFrame = (ARUint8*)buffer;
+
+	bool b = gARTK->update(startOfFrame);
+	
+	mediaBuffer->Unlock();
+
+	mediaBuffer->Release();
+	
+	return b;
+}
+
 
 EXPORT_API void aruwpSetVideoThreshold(int threshold)
 {
