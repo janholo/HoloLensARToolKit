@@ -70,7 +70,6 @@
 
 
 #pragma once
-#define ARDOUBLE_IS_FLOAT
 #include <AR/ar.h>
 #include <ARController.h>
 #include <Mfidl.h>
